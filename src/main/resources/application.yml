@@ -1,3 +1,8 @@
 spring:
   application:
     name: aladin
+  datasource:
+    url: jdbc:mysql://localhost:3306/aladin
+    username: aladin_user
+    password: aladin_pass
+    driver-class-name: com.mysql.cj.jdbc.Driver
