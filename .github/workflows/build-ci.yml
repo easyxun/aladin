@@ -1,0 +1,37 @@
+name: Only Build Gradle without Test
+
+on:
+  push:
+    branches: [ "develop", "main" ]
+  pull_request:
+    branches: [ "develop", "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      # 1. 현재 GitHub 리포지토리의 코드를 Github Actions 가상 머신에 가져오기
+      - name: 📦 Checkout source
+        uses: actions/checkout@v4
+
+      # 2. JDK 17 설치
+      - name: ☕ Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # 3. Gradle 캐시 세팅 및 초기화 (빌드 속도 향상)
+      - name: ⚙️ Set up Gradle with caching
+        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+
+      # 4. gradlew 실행 파일에 실행 권한 부여
+      - name: 🔧 Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      # 5. 테스트를 제외하고 빌드만 수행
+      - name: 🛠️ Build without Test
+        run: ./gradlew build -x test
