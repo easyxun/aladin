@@ -70,7 +70,7 @@ CREATE TABLE p_categories (
 
 -- 도서 테이블
 CREATE TABLE p_book (
-                        book_id BIGINT PRIMARY KEY,
+                        book_id BIGINT AUTO_INCREMENT PRIMARY KEY,
                         book_title VARCHAR(50) NOT NULL,
                         book_author VARCHAR(50) NOT NULL,
                         book_publisher VARCHAR(50) NOT NULL,
@@ -175,3 +175,49 @@ CREATE TABLE p_book_tags (
                              deleted_at TIMESTAMP,
                              deleted_by VARCHAR(100)
 );
+
+-- 한국도서 (1)
+--  ├─ 소설 (3)
+--  │   ├─ 현대소설 (9)
+--  │   └─ 고전소설 (10)
+--  ├─ 에세이 (4)
+--  │   └─ 자기계발 (11)
+--  └─ 인문 (5)
+--      └─ 철학 (12)
+
+-- 외국도서 (2)
+--  ├─ 소설 (6)
+--  │   ├─ 영미문학 (13)
+--  │   └─ 일본문학 (14)
+--  ├─ 에세이 (7)
+--  │   └─ 여행기 (15)
+--  └─ 과학 (8)
+--      └─ 천문학 (16)
+
+
+-- depth 0: 상위 카테고리
+INSERT INTO p_categories (category_id, category_name, category_depth, parent_id)
+VALUES (1, '한국도서', 0, NULL),
+       (2, '외국도서', 0, NULL);
+
+-- depth 1: 중분류
+INSERT INTO p_categories (category_id, category_name, category_depth, parent_id)
+VALUES (3, '소설', 1, 1),
+       (4, '에세이', 1, 1),
+       (5, '인문', 1, 1),
+
+       (6, '소설', 1, 2),
+       (7, '에세이', 1, 2),
+       (8, '과학', 1, 2);
+
+-- depth 2: 세분류
+INSERT INTO p_categories (category_id, category_name, category_depth, parent_id)
+VALUES (9, '현대소설', 2, 3),
+       (10, '고전소설', 2, 3),
+       (11, '자기계발', 2, 4),
+       (12, '철학', 2, 5),
+
+       (13, '영미문학', 2, 6),
+       (14, '일본문학', 2, 6),
+       (15, '여행기', 2, 7),
+       (16, '천문학', 2, 8);
