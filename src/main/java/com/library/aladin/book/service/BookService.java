@@ -28,30 +28,13 @@ public class BookService {
      *                }
      */
     public BookCreateResponseDto createBook(BookCreateRequestDto request) {
-        // 1. DB에 저장 할 Book 객체 생성 (builder 사용)
-        Book book = Book.builder()
-                .bookTitle(request.getBookTitle())
-                .bookAuthor(request.getBookAuthor())
-                .bookPublisher(request.getBookPublisher())
-                .bookDesc(request.getBookDesc())
-                .bookPrice(request.getBookPrice())
-                .bookThumbnail(request.getBookThumbnail())
-                .categoryId(request.getCategoryId())
-                .build();
+        // 1. Book 생성
+        Book book = request.toEntity();
 
-        // 2. DB에 저장 (insert + bookId 자동 생성됨 - setter 사용)
+        // 2. DB 저장
         bookMapper.createBook(book);
 
-        // 3. 응답 객체 생성
-        return BookCreateResponseDto.builder()
-                .bookId(book.getBookId())
-                .bookTitle(book.getBookTitle())
-                .bookAuthor(book.getBookAuthor())
-                .bookPublisher(book.getBookPublisher())
-                .bookDesc(book.getBookDesc())
-                .bookPrice(book.getBookPrice())
-                .bookThumbnail(book.getBookThumbnail())
-                .categoryId(book.getCategoryId())
-                .build();
+        // 3. 응답 생성
+        return BookCreateResponseDto.fromEntity(book);
     }
 }
