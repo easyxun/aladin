@@ -7,10 +7,12 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 @Getter
-@Setter
 @Builder
 public class Book {
+
+    @Setter
     private Long bookId;
+
     private String bookTitle;
     private String bookAuthor;
     private String bookPublisher;
@@ -18,4 +20,5 @@ public class Book {
     private BigDecimal bookPrice;
     private String bookThumbnail;
     private Long categoryId;
+
 }
