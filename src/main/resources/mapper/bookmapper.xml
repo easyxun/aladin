@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.library.aladin.book.mapper.BookMapper">
+
+    <insert id="createBook" parameterType="com.library.aladin.book.dto.request.BookCreateRequestDto">
+        INSERT INTO aladin.p_book (book_title,
+                                   book_author,
+                                   book_publisher,
+                                   book_desc,
+                                   book_price,
+                                   book_thumbnail,
+                                   category_id)
+        VALUES (#{bookTitle},
+                #{bookAuthor},
+                #{bookPublisher},
+                #{bookDesc},
+                #{bookPrice},
+                #{bookThumbnail},
+                #{categoryId})
+    </insert>
+
+</mapper>
