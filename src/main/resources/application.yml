@@ -6,3 +6,7 @@ spring:
     username: aladin_user
     password: aladin_pass
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.library.aladin.book.dto
