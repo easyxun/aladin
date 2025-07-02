@@ -1,6 +1,7 @@
 package com.library.aladin.book.controller;
 
 import com.library.aladin.book.dto.request.BookCreateRequestDto;
+import com.library.aladin.book.dto.request.BookUpdateRequestDto;
 import com.library.aladin.book.dto.response.BookCreateResponseDto;
 import com.library.aladin.book.dto.response.BookResponseDto;
 import com.library.aladin.book.service.BookService;
@@ -37,6 +38,13 @@ public class BookController {
     public ResponseEntity<ApiResponse<List<BookResponseDto>>> getAllBook() {
         List<BookResponseDto> response = bookService.getAllBook();
         return ResponseEntity.ok(ApiResponse.ok("도서 전체 조회 성공", response));
+    }
+
+    // 도서 수정
+    @PutMapping
+    public ResponseEntity<ApiResponse<BookResponseDto>> updateBook(@RequestBody BookUpdateRequestDto request) {
+        BookResponseDto response = bookService.updateBook(request);
+        return ResponseEntity.ok(ApiResponse.ok("도서 수정 성공", response));
     }
 
 }

@@ -21,4 +21,16 @@ public class Book {
     private String bookThumbnail;
     private Long categoryId;
 
+    public void updateBook(String bookTitle, String bookAuthor, String bookPublisher,
+                           String bookDesc, BigDecimal bookPrice, String bookThumbnail,
+                           Long categoryId) {
+        this.bookTitle = bookTitle;
+        this.bookAuthor = bookAuthor;
+        this.bookPublisher = bookPublisher;
+        this.bookDesc = bookDesc;
+        this.bookPrice = bookPrice;
+        this.bookThumbnail = bookThumbnail;
+        this.categoryId = categoryId;
+    }
+
 }

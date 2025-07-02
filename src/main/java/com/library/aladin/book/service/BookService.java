@@ -2,11 +2,13 @@ package com.library.aladin.book.service;
 
 import com.library.aladin.book.domain.Book;
 import com.library.aladin.book.dto.request.BookCreateRequestDto;
+import com.library.aladin.book.dto.request.BookUpdateRequestDto;
 import com.library.aladin.book.dto.response.BookCreateResponseDto;
 import com.library.aladin.book.dto.response.BookResponseDto;
 import com.library.aladin.book.mapper.BookMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -64,5 +66,27 @@ public class BookService {
                 .toList();
     }
 
+    /**
+     * 도서 수정
+     */
+    public BookResponseDto updateBook(BookUpdateRequestDto request) {
+        Book book = bookMapper.findById(request.getBookId());
+        if (book == null) {
+            throw new IllegalArgumentException("없음");
+        }
 
+        book.updateBook(
+                StringUtils.hasText(request.getBookTitle()) ? request.getBookTitle() : book.getBookTitle(),
+                StringUtils.hasText(request.getBookAuthor()) ? request.getBookAuthor() : book.getBookAuthor(),
+                StringUtils.hasText(request.getBookPublisher()) ? request.getBookPublisher() : book.getBookPublisher(),
+                StringUtils.hasText(request.getBookDesc()) ? request.getBookDesc() : book.getBookDesc(),
+                request.getBookPrice() != null ? request.getBookPrice() : book.getBookPrice(),
+                StringUtils.hasText(request.getBookThumbnail()) ? request.getBookThumbnail() : book.getBookThumbnail(),
+                request.getCategoryId() != null ? request.getCategoryId() : book.getCategoryId()
+        );
+
+        bookMapper.updateBook(book);
+
+        return BookResponseDto.fromEntity(book);
+    }
 }

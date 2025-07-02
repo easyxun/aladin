@@ -16,4 +16,7 @@ public interface BookMapper {
     // 도서 전체 반환 (is_deleted = false)
     List<Book> findAllBooks();
 
+    // 도서 수정
+    void updateBook(Book book);
+
 }

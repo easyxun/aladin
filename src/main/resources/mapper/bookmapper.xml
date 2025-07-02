@@ -55,5 +55,18 @@
         ORDER BY book_id DESC
     </select>
 
+    <!-- 도서 수정 -->
+    <update id="updateBook" parameterType="com.library.aladin.book.domain.Book">
+        UPDATE p_book
+        SET book_title = #{bookTitle},
+            book_author = #{bookAuthor},
+            book_publisher = #{bookPublisher},
+            book_desc = #{bookDesc},
+            book_price = #{bookPrice},
+            book_thumbnail = #{bookThumbnail},
+            category_id = #{categoryId}
+        WHERE book_id = #{bookId}
+    </update>
+
 
 </mapper>
