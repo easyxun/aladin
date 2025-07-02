@@ -5,6 +5,7 @@
 
 <mapper namespace="com.library.aladin.book.mapper.BookMapper">
 
+    <!-- 도서 등록 -->
     <insert id="createBook"
             parameterType="com.library.aladin.book.domain.Book"
             useGeneratedKeys="true"
@@ -24,5 +25,19 @@
                 #{bookThumbnail},
                 #{categoryId})
     </insert>
+
+    <!-- 도서 아이디로 도서 반환 -->
+    <select id="findById" parameterType="long" resultType="com.library.aladin.book.domain.Book">
+        SELECT book_id,
+               book_title,
+               book_author,
+               book_publisher,
+               book_desc,
+               book_price,
+               book_thumbnail,
+               category_id
+        FROM p_book
+        WHERE book_id = #{bookId}
+    </select>
 
 </mapper>

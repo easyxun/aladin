@@ -3,6 +3,7 @@ package com.library.aladin.book.service;
 import com.library.aladin.book.domain.Book;
 import com.library.aladin.book.dto.request.BookCreateRequestDto;
 import com.library.aladin.book.dto.response.BookCreateResponseDto;
+import com.library.aladin.book.dto.response.BookResponseDto;
 import com.library.aladin.book.mapper.BookMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,4 +38,18 @@ public class BookService {
         // 3. 응답 생성
         return BookCreateResponseDto.fromEntity(book);
     }
+
+    /**
+     * 도서 단건 조회
+     *
+     * @param bookId 조회할 도서의 ID
+     */
+    public BookResponseDto getBook(Long bookId) {
+        Book book = bookMapper.findById(bookId);
+        if (book == null) {
+            throw new IllegalArgumentException("없음");
+        }
+        return BookResponseDto.fromEntity(book);
+    }
+
 }
