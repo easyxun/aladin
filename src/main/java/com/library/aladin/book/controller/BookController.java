@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/books")
 @RequiredArgsConstructor
@@ -28,6 +30,13 @@ public class BookController {
     public ResponseEntity<ApiResponse<BookResponseDto>> getBook(@PathVariable Long bookId) {
         BookResponseDto response = bookService.getBook(bookId);
         return ResponseEntity.ok(ApiResponse.ok("도서 조회 성공", response));
+    }
+
+    // 도서 전체 조회 (is_deleted = false)
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<BookResponseDto>>> getAllBook() {
+        List<BookResponseDto> response = bookService.getAllBook();
+        return ResponseEntity.ok(ApiResponse.ok("도서 전체 조회 성공", response));
     }
 
 }

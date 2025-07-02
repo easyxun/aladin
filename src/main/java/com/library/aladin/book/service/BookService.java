@@ -8,6 +8,8 @@ import com.library.aladin.book.mapper.BookMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BookService {
@@ -51,5 +53,16 @@ public class BookService {
         }
         return BookResponseDto.fromEntity(book);
     }
+
+    /**
+     * 도서 전체 조회 (is_deleted = false)
+     */
+    public List<BookResponseDto> getAllBook() {
+        List<Book> books = bookMapper.findAllBooks();
+        return books.stream()
+                .map(BookResponseDto::fromEntity)
+                .toList();
+    }
+
 
 }

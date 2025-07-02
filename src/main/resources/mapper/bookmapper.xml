@@ -40,4 +40,20 @@
         WHERE book_id = #{bookId}
     </select>
 
+    <!-- 도서 전체 반환 (is_deleted = false) -->
+    <select id="findAllBooks" resultType="com.library.aladin.book.domain.Book">
+        SELECT book_id,
+               book_title,
+               book_author,
+               book_publisher,
+               book_desc,
+               book_price,
+               book_thumbnail,
+               category_id
+        FROM p_book
+        WHERE is_deleted = FALSE
+        ORDER BY book_id DESC
+    </select>
+
+
 </mapper>
