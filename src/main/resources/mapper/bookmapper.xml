@@ -5,7 +5,10 @@
 
 <mapper namespace="com.library.aladin.book.mapper.BookMapper">
 
-    <insert id="createBook" parameterType="com.library.aladin.book.dto.request.BookCreateRequestDto">
+    <insert id="createBook"
+            parameterType="com.library.aladin.book.domain.Book"
+            useGeneratedKeys="true"
+            keyProperty="bookId">
         INSERT INTO aladin.p_book (book_title,
                                    book_author,
                                    book_publisher,
