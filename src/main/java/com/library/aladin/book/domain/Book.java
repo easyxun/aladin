@@ -20,5 +20,21 @@ public class Book {
     private BigDecimal bookPrice;
     private String bookThumbnail;
     private Long categoryId;
+    private boolean isDeleted;
 
+    public void updateBook(String bookTitle, String bookAuthor, String bookPublisher,
+                           String bookDesc, BigDecimal bookPrice, String bookThumbnail,
+                           Long categoryId) {
+        this.bookTitle = bookTitle;
+        this.bookAuthor = bookAuthor;
+        this.bookPublisher = bookPublisher;
+        this.bookDesc = bookDesc;
+        this.bookPrice = bookPrice;
+        this.bookThumbnail = bookThumbnail;
+        this.categoryId = categoryId;
+    }
+
+    public void deleteBook() {
+        this.isDeleted = true;
+    }
 }
