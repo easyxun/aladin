@@ -89,4 +89,19 @@ public class BookService {
 
         return BookResponseDto.fromEntity(book);
     }
+
+    /**
+     * 도서 삭제
+     * @param bookId 삭제할 도서의 ID
+     */
+    public BookResponseDto deleteBook(Long bookId) {
+        Book book = bookMapper.findById(bookId);
+        if (book == null) {
+            throw new IllegalArgumentException("없음");
+        }
+        book.deleteBook();
+        bookMapper.deleteBook(book);
+
+        return BookResponseDto.fromEntity(book);
+    }
 }

@@ -19,4 +19,7 @@ public interface BookMapper {
     // 도서 수정
     void updateBook(Book book);
 
+    // 도서 삭제
+    void deleteBook(Book book);
+
 }

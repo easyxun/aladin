@@ -20,6 +20,7 @@ public class Book {
     private BigDecimal bookPrice;
     private String bookThumbnail;
     private Long categoryId;
+    private boolean isDeleted;
 
     public void updateBook(String bookTitle, String bookAuthor, String bookPublisher,
                            String bookDesc, BigDecimal bookPrice, String bookThumbnail,
@@ -33,4 +34,7 @@ public class Book {
         this.categoryId = categoryId;
     }
 
+    public void deleteBook() {
+        this.isDeleted = true;
+    }
 }

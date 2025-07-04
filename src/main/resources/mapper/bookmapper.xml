@@ -35,7 +35,8 @@
                book_desc,
                book_price,
                book_thumbnail,
-               category_id
+               category_id,
+               is_deleted
         FROM p_book
         WHERE book_id = #{bookId}
     </select>
@@ -49,7 +50,8 @@
                book_desc,
                book_price,
                book_thumbnail,
-               category_id
+               category_id,
+               is_deleted
         FROM p_book
         WHERE is_deleted = FALSE
         ORDER BY book_id DESC
@@ -65,6 +67,13 @@
             book_price = #{bookPrice},
             book_thumbnail = #{bookThumbnail},
             category_id = #{categoryId}
+        WHERE book_id = #{bookId}
+    </update>
+
+    <!-- 도서 삭제 -->
+    <update id="deleteBook" parameterType="com.library.aladin.book.domain.Book">
+        UPDATE p_book
+        SET is_deleted = #{isDeleted}
         WHERE book_id = #{bookId}
     </update>
 
