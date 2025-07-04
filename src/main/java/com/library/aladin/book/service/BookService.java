@@ -104,4 +104,21 @@ public class BookService {
 
         return BookResponseDto.fromEntity(book);
     }
+
+    /**
+     * 도서 검색
+     * @param keyword 키워드
+     * @param categoryId 카테고리 ID
+     * @param tagId 태그 ID
+     */
+    public List<BookResponseDto> searchBooks(String keyword, Long categoryId, Long tagId) {
+        List<Book> books = bookMapper.searchBooks(keyword, categoryId, tagId);
+        if (books.isEmpty()) {
+            throw new IllegalArgumentException("없음");
+        }
+        return books.stream()
+                .map(BookResponseDto::fromEntity)
+                .toList();
+    }
+
 }

@@ -22,4 +22,6 @@ public interface BookMapper {
     // 도서 삭제
     void deleteBook(Book book);
 
+    // 도서 검색
+    List<Book> searchBooks(String keyword, Long categoryId, Long tagId);
 }

@@ -78,4 +78,35 @@
     </update>
 
 
+    <!-- 도서 검색 -->
+    <select id="searchBooks" resultType="com.library.aladin.book.domain.Book">
+        SELECT b.book_id,
+        b.book_title,
+        b.book_author,
+        b.book_publisher,
+        b.book_desc,
+        b.book_price,
+        b.book_thumbnail,
+        b.category_id,
+        b.is_deleted
+        FROM p_book b
+        LEFT JOIN p_book_tags bt ON b.book_id = bt.book_id
+        <where>
+            b.is_deleted = FALSE
+            <if test="keyword != null and keyword != ''">
+                AND (b.book_title LIKE CONCAT('%', #{keyword}, '%')
+                OR b.book_author LIKE CONCAT('%', #{keyword}, '%')
+                OR b.book_publisher LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+            <if test="categoryId != null">
+                AND b.category_id = #{categoryId}
+            </if>
+            <if test="tagId != null">
+                AND bt.tag_id = #{tagId}
+            </if>
+        </where>
+        GROUP BY b.book_id
+        ORDER BY b.book_id DESC
+    </select>
+
 </mapper>

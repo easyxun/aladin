@@ -54,4 +54,12 @@ public class BookController {
         return ResponseEntity.ok(ApiResponse.ok("도서 삭제 성공", response));
     }
 
+    // 도서 검색
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<BookResponseDto>>> searchBooks(@RequestParam(required = false) String keyword, @RequestParam(required = false) Long categoryId, @RequestParam(required = false) Long tagId) {
+        List<BookResponseDto> response = bookService.searchBooks(keyword, categoryId, tagId);
+        return ResponseEntity.ok(ApiResponse.ok("도서 검색 성공", response));
+    }
+
+
 }
